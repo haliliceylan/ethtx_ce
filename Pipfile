@@ -4,7 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-ethtx = "==0.3.10"
+toml = "*"
+pymongo = ">=3.12.0"
+dnspython = ">=2.2.0"
+mongoengine = "==0.23.1"
+mongomock = "==3.23.0"
+eth-account = "==0.5.6"
+eth-utils = "==1.10.0"
+eth-rlp = "==0.2.1"
+pydantic = ">=1.9.0"
+ethtx = {editable = true, git = "https://github.com/haliliceylan/ethtx"}
 web3 = "==5.26.0"
 python-dotenv = "*"
 flask = ">=2.0.2"
