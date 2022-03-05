@@ -24,15 +24,13 @@ ethtx_config = EthTxConfig(
     mongo_connection_string=os.getenv("MONGO_CONNECTION_STRING"),
     etherscan_api_key=os.getenv("ETHERSCAN_KEY"),
     web3nodes={
-        "mainnet": dict(hook=os.getenv("MAINNET_NODE_URL", ""), poa=False),
-        "goerli": dict(hook=os.getenv("GOERLI_NODE_URL", ""), poa=True),
-        "rinkeby": dict(hook=os.getenv("RINKEBY_NODE_URL", ""), poa=True),
+        "mainnet": dict(hook=os.getenv("MAINNET_NODE_URL", ""), poa=True),
+        "tesnet": dict(hook=os.getenv("TESTNET_NODE_URL", ""), poa=True),
     },
     default_chain="mainnet",
     etherscan_urls={
-        "mainnet": "https://api.etherscan.io/api",
-        "goerli": "https://api-goerli.etherscan.io/api",
-        "rinkeby": "https://api-rinkeby.etherscan.io/api",
+        "mainnet": "https://api.bscscan.com/api",
+        "testnet": "https://api-testnet.bscscan.com/api",
     },
 )
 
