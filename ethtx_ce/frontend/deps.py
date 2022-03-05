@@ -33,7 +33,6 @@ eth_price: Optional[float] = None
 eth_price_update: Optional[float] = None
 
 
-@auth.verify_password
 def verify_password(username: str, password: str) -> bool:
     """Verify user, return bool."""
     return username == Config.ETHTX_ADMIN_USERNAME and compare_digest(

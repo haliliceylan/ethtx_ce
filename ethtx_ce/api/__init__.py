@@ -37,7 +37,6 @@ def api_route(bp: Blueprint, *args, **kwargs):
 
     def decorator(f: Callable):
         @bp.route(*args, **kwargs)
-        @auth_required
         @wraps(f)
         def wrapper(*args, **kwargs):
             sc = 200

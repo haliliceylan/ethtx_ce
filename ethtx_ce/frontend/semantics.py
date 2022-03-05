@@ -42,7 +42,6 @@ log = logging.getLogger(__name__)
 
 @frontend_route(bp, "/semantics/<string:address>/")
 @frontend_route(bp, "/semantics/<string:chain_id>/<string:address>/")
-@auth.login_required
 def semantics(address: str, chain_id: Optional[str] = None) -> show_semantics_page:
     raw_semantics = current_app.ethtx.semantics.get_semantics(
         chain_id=chain_id or current_app.ethtx._default_chain, address=address
@@ -52,7 +51,6 @@ def semantics(address: str, chain_id: Optional[str] = None) -> show_semantics_pa
 
 
 @frontend_route(bp, "/reload", methods=["POST"])
-@auth.login_required
 def reload_semantics():
     """Reload raw semantic."""
     data = json.loads(request.data)
@@ -69,14 +67,12 @@ def reload_semantics():
 
 
 @frontend_route(bp, "/save", methods=["POST"])
-@auth.login_required
 def semantics_save():
     data = json.loads(request.data)
     return _semantics_save(data)
 
 
 @frontend_route(bp, "/poke", methods=["POST"])
-@auth.login_required
 def poke_abi():
     data = json.loads(request.data)
     return _poke_abi(data)
