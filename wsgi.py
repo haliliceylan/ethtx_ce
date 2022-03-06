@@ -15,8 +15,9 @@ import os
 from ethtx import EthTx, EthTxConfig
 from flask import Flask
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
-
+from cache import remember
 from ethtx_ce import frontend, api
+from ethtxcache import EthTxC
 
 app = Flask(__name__)
 
@@ -34,7 +35,12 @@ ethtx_config = EthTxConfig(
     },
 )
 
-ethtx = EthTx.initialize(ethtx_config)
+class EthTxCache(EthTxC):
+    def decode_transaction_cache(self, chain_id, tx_hash):
+        return remember(f"transaction{chain_id}{tx_hash}", lambda: self.decoders.decode_transaction(chain_id=chain_id, tx_hash=tx_hash))
+
+ethtx = EthTxCache.initialize(ethtx_config,EthTxCache)
+
 
 app.wsgi_app = DispatcherMiddleware(
     frontend.create_app(engine=ethtx, settings_override=EthTxConfig),

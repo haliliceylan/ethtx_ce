@@ -30,7 +30,7 @@ def read_decoded_transaction(
     tx_hash = tx_hash if tx_hash.startswith("0x") else "0x" + tx_hash
 
     chain_id = chain_id or current_app.ethtx.default_chain
-    decoded_transaction = current_app.ethtx.decoders.decode_transaction(
+    decoded_transaction = current_app.ethtx.decode_transaction_cache(
         chain_id=chain_id, tx_hash=tx_hash
     )
     decoded_transaction.metadata.timestamp = (
